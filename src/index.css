@@ -1,0 +1,28 @@
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+.toast-custom {
+    position: fixed;
+    z-index: 1;
+    right: 10px;
+    bottom: 50px;
+}
+
+.date-custom {
+    position: relative;
+}
+.date-custom .fa-calendar {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+}
+
+.modal-header .close {
+    outline: none;
+}
+
+.cus-table i.fa {
+    min-width: 15px;
+    text-align: center;
+}

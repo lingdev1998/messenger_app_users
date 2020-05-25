@@ -1,0 +1,30 @@
+@import url("~react-table/react-table.css");
+.header-screen {
+  margin-bottom: 20px;
+
+  button {
+    margin-left: 10px;
+    color: #FFFFFF;
+  }
+  button:hover {
+    color: #FFFFFF;
+  }
+  .btn-one {
+    margin-left: 0px;
+  }
+}
+
+.btn.btn-primary, .btn.btn-info {
+  height: 35px;
+}
+
+.input-group.mb-3 {
+  width: 50%;
+}
+
+.input-group-append {
+  button {
+    margin: 0px;
+    border: 0;
+  }
+}
