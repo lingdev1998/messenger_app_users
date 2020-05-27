@@ -1,44 +1,52 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { messengerActions } from '../action/MessengerActions';
 import ConversationSearch from '../ConversationSearch';
 import ConversationListItem from '../ConversationListItem';
 import Toolbar from '../Toolbar';
 import ToolbarButton from '../ToolbarButton';
-import axios from 'axios';
-import {Row} from 'reactstrap';
+import { Row } from 'reactstrap';
 import './ConversationList.css';
 
 
-export default function ConversationList(props) {
-   const [conversations, setConversations] = useState([]);
- 
+export const ConversationList = (props) => {
+  const listConversations = useSelector(state => state.messengerReducer.listConversations);
+  const [conversations, setConversations] = useState([]);
+
   useEffect(() => {
-     
-  },[])
+    setConversations(conversations => [...conversations, listConversations]);
+  }, [listConversations])
 
- 
 
-    return (
-      <div className="conversation-list">
-         <Toolbar
-          title="Conversation List"
-          leftItems={[
-            <ToolbarButton key="cog" icon="ion-ios-cog" />
-          ]}
-          rightItems={[
-            <ToolbarButton key="add" icon="ion-ios-add-circle-outline" />
-          ]}
-        />
-         <ConversationSearch />
+
+  return (
+    <div className="card  section-messenger">
+      {/* <Toolbar
+        title="Conversation List"
+        leftItems={[
+          <ToolbarButton key="cog" icon="ion-ios-cog" />
+        ]}
+        rightItems={[
+          <ToolbarButton key="add" icon="ion-ios-add-circle-outline" />
+        ]}
+      /> */}
+
+      <div className="card-header">
+        <h5 className="card-title mb-0 text-center">Conversation List</h5>
+      </div>
+      <div class="conversation-list">
+        <ConversationSearch />
         {
-          props.conversations.map(conversation =>
+          listConversations.map(conversation =>
             <ConversationListItem
-              key={conversation.name}
+            handleChangeConversation={props.handleChangeConversation}
+              key={conversation.title}
               data={conversation}
             />
           )
         }
       </div>
-    );
+
+    </div>
+  );
 }
+export default ConversationList;

@@ -18,14 +18,15 @@ const Login = (props) => {
 
   const handleSubmit = () => {
     var formData = {
-      email,
-      password
+      email : email,
+      password:password
     }
+    var name = formData['email'].substring(0, formData['email'].lastIndexOf("@"));
     var form = new FormData();
     // form.append("userName", formData.email);
     // form.append("password", formData.password);
-    form.append("userName", "vandoan547");
-    form.append("password", "Linh@12345");
+    form.append("userName",email);
+    form.append("password",password);
     dispatch(loginUser(form));
   }
 
@@ -36,8 +37,8 @@ const Login = (props) => {
   const validationSchema = function (values) {
     return Yup.object().shape({
       email: Yup.string()
-        .email("Invalid email address")
-        .required("Email is required!"),
+      .min(6, `Username has to be at least  ${6} characters!`)
+      .required("Username is required!"),
       password: Yup.string()
         .min(6, `Password has to be at least ${6} characters!`)
         .required("Password is required!"),
@@ -123,8 +124,11 @@ const Login = (props) => {
                               required
                               onBlur={handleBlur}
                               value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                              placeholder="email"
+                              onChange={(e) => {
+                                setEmail(e.target.value);
+                                console.log(email);
+                              }}
+                              placeholder="User Name..."
                               autoComplete="username"
                             />
                             <FormFeedback>{errors.email}</FormFeedback>
