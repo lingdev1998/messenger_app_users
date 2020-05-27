@@ -1,5 +1,16 @@
 .message-list-container {
   min-height:80vh;
-  overflow: scroll;
-  border:1px solid;
+  overflow-x: hidden;
+  overflow-y:hidden ;
+  max-height: 81vh;
+  padding: 0px;
+ }
+.message-list-container-item{
+   min-height: 75vh;
+  max-height: 75vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.section-messenger{
+  max-height: 88vh;
 }

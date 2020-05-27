@@ -2,6 +2,7 @@ import React, { Component, Suspense } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { Container } from 'reactstrap';
 import { logout } from './../../reducers/authentication';
+import { getUser } from '../../reducers/user';
 import {
   AppAside,
   AppBreadcrumb,
@@ -33,6 +34,15 @@ class DefaultLayout extends Component {
     this.props.logout();
     this.props.history.push('/login')
   }
+  componentWillMount(){
+    this.props.getUser();
+  }
+  constructor(props) {
+    super(props);
+    this.state = {
+      openProfileModal: false,
+    };
+   }
 
   render() {
     return (
@@ -53,7 +63,7 @@ class DefaultLayout extends Component {
             <AppSidebarMinimizer />
           </AppSidebar>
           <main className="main">
-            <AppBreadcrumb appRoutes={routes} />
+            {/* <AppBreadcrumb appRoutes={routes} /> */}
             <Container fluid>
               <Suspense fallback={this.loading()}>
                 <Switch>
@@ -98,7 +108,7 @@ const mapStateToProps = ({ authentication }) => ({
 
 });
 
-const mapDispatchToProps = { logout };
+const mapDispatchToProps = { logout,getUser };
 
 export default connect(
   mapStateToProps,

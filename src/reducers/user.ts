@@ -15,7 +15,8 @@ const initialState = {
   loading: false,
   dataTable: {} as any,
   mapRoles: [] as any,
-  errorMes: {} as any
+  errorMes: {} as any,
+  userInfo : {} as any
 };
 
 // export type AuthenticationState = Readonly<typeof initialState>;
@@ -47,7 +48,7 @@ export default (state: UserState = initialState, action): UserState => {
       return {
         ...state,
         loading: false,
-        dataTable: action.payload.data
+        userInfo : action.payload.data
       };
     case SUCCESS(ACTION_TYPES.GET_ROLE_MAP):
       console.log(action.payload, 'action.payload')
@@ -90,8 +91,8 @@ export default (state: UserState = initialState, action): UserState => {
 export const getUser = params => dispatch => {
   const result = dispatch({
     type: ACTION_TYPES.GET_USER,
-    payload: axios.post(
-      SERVER_API_URL + "user/doSearch",
+    payload: axios.get(
+      SERVER_API_URL + "/users/getInfoUser",
       params
     ),
     meta: {

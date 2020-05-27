@@ -63,14 +63,19 @@ export default (
     case SUCCESS(ACTION_TYPES.LOGIN):
       const token = action.payload.data.jwt;
       console.log("Token: ",token);
+      const user = action.payload.data.user;
       if (token) {
         const jwt = token;
         localStorage.setItem(AUTH_TOKEN_KEY, jwt);
+        localStorage.setItem("userName", user.userName);
+        localStorage.setItem("id", user.id);
+
       }
       return {
         ...state,
         isAuthenticated: true,
-        loading: false
+        loading: false,
+        user: action.payload.data.user
       };
     case SUCCESS(ACTION_TYPES.GET_SESSION): {
       const isAuthenticated = action.payload && action.payload.data;
@@ -79,7 +84,7 @@ export default (
         isAuthenticated,
         loading: false,
         sessionHasBeenFetched: true,
-        user: action.payload.data
+        user: action.payload.data.user
       };
     }
     // No axios

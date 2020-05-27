@@ -1,4 +1,5 @@
 .conversation-list {
  overflow-y: scroll;
+ min-height:80vh;
  max-height: 83vh;
  }

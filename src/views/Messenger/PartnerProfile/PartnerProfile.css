@@ -1,5 +1,10 @@
 .partner-profile{
-    min-height: 84vh;
-    max-height: 84vh;
-    overflow:hidden;
+    min-height:88vh;
+    overflow-x: hidden;
+    overflow-y:hidden ;
+    max-height: 92vh;
+    padding: 0px;
 }
+.section-messenger{
+    max-height: 88vh;
+  }
