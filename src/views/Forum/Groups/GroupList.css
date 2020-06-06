@@ -1,0 +1,32 @@
+.list-group li {
+    border: none;
+    background-color: #FAFAFA;
+
+}
+
+.listGroupItem {
+ 
+    margin: 12px;
+    position: relative;
+    padding: 12px;
+}
+
+.listGroupItemWrapper {}
+
+.clearFix {
+ }
+
+.clearFix-img {
+    float: left;
+    min-height: 1px;
+    margin-right: 8px;
+}
+
+.clearFix-img a {
+    color: #385898;
+    cursor: pointer;
+    text-decoration: none;
+}
+ 
+
+ 

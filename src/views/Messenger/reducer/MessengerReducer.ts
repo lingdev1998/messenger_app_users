@@ -20,7 +20,14 @@ export default function messengerReducer(state: MessengerReducer = initialState,
         case FAILURE(MESSENGER_ACTION_TYPES.GET_ALL_CONVERSATION):
             return { ...state }
         case SUCCESS(MESSENGER_ACTION_TYPES.GET_ALL_CONVERSATION):
-            return { ...state, listConversations: action.payload }
+             if(action.payload){
+                 action.payload.forEach(element => {
+                    element.selected = false;
+                });
+            }
+            console.log(action.payload)
+
+            return { ...state, listConversations:  action.payload }
 
         //get All Message of conversation
         case REQUEST(MESSENGER_ACTION_TYPES.GET_LIST_MESSAGE):

@@ -25,7 +25,7 @@ const Login = (props) => {
     var form = new FormData();
     // form.append("userName", formData.email);
     // form.append("password", formData.password);
-    form.append("userName",email);
+    form.append("userName",name);
     form.append("password",password);
     dispatch(loginUser(form));
   }
