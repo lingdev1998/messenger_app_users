@@ -11,11 +11,13 @@ import './ConversationList.css';
 export const ConversationList = (props) => {
   const listConversations = useSelector(state => state.messengerReducer.listConversations);
   const [conversations, setConversations] = useState([]);
-
+  const [currentConversation, setCurrentConversation] = useState(0);
   useEffect(() => {
     setConversations(conversations => [...conversations, listConversations]);
-  }, [listConversations])
-
+    setCurrentConversation(props.currentConversation.conversation_id);
+    console.log("rerender");
+    console.log("current:" ,currentConversation)
+  }, [listConversations, props.currentConversation])
 
 
   return (
@@ -33,16 +35,27 @@ export const ConversationList = (props) => {
       <div className="card-header">
         <h5 className="card-title mb-0 text-center">Conversation List</h5>
       </div>
-      <div class="conversation-list">
+      <div className="conversation-list">
         <ConversationSearch />
         {
-          listConversations.map(conversation =>
-            <ConversationListItem
-            handleChangeConversation={props.handleChangeConversation}
-              key={conversation.title}
-              data={conversation}
-            />
-          )
+          listConversations.map(function (conversation) {
+            if (conversation.conversation_id === currentConversation) {
+              return <ConversationListItem
+                handleChangeConversation={props.handleChangeConversation}
+                key={conversation.title}
+                data={conversation}
+                selected={true}
+              />
+            }
+            else{
+              return <ConversationListItem
+                handleChangeConversation={props.handleChangeConversation}
+                key={conversation.title}
+                data={conversation}
+                selected={false}
+                />
+            }
+          })
         }
       </div>
 

@@ -53,8 +53,11 @@ export const Messenger = (props) => {
     if (!ws.current) return;
 
     ws.current.onmessage = e => {
+
       const message = JSON.parse(e.data);
+      console.log(message);
       if (message.type === "message") {
+        console.log(message);
         if (message.to_user !== undefined && message.to_user !== null) {
           if (message.user.username == currentConversation.partner) {
             console.log(message);
@@ -100,7 +103,7 @@ export const Messenger = (props) => {
           ]}
         /> */}
 
-        <ConversationList handleChangeConversation={handleChangeConversation} />
+        <ConversationList  currentConversation={currentConv} handleChangeConversation={handleChangeConversation} />
 
       </Col>
       <Col md={6}>

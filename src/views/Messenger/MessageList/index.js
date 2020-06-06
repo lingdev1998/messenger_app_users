@@ -30,25 +30,6 @@ export default function MessageList(props) {
   useEffect(() => {
     setCurrentUser(currentUser);
     setListMsg(listMessages);
-      if(props.lastestMess !== undefined){
-        console.log("last",props.lastestMess);
-        if (props.lastestMess.to_user !== undefined && props.lastestMess.to_user !== null) {
-          if (props.lastestMess.user.username == props.currentConversation.partner) {
-            console.log(props.lastestMess);
-            let params = {
-              id: "22",
-              guid: null,
-              conversation_id: props.currentConversation.conversation_id,
-              userName_sender: props.lastestMess.user.username,
-              message_type: "text",
-              message: props.lastestMess.message,
-              created_at: "2020-05-27 02:20:53",
-              deleted_at: null
-            };
-            dispatch(updateListMessage(params));
-          }
-        }
-      }
   }, [props.lastestMess]);
 
   const handleSendMessage = (event) => {
@@ -164,7 +145,7 @@ export default function MessageList(props) {
           <div className="col-12 message-list-container-item">
             {renderMessages()}
           </div>
-          <div class="col-12 compose">
+          <div className="col-12 compose">
             <Row>
   
               <Compose handleSendMessage={handleSendMessage} input={input} onInputChange={onInputChange} rightItems={[

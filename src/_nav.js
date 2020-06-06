@@ -1,6 +1,15 @@
 export default {
   items: [
 
+    {
+      name: 'Profile',
+      url: '/profile',
+      icon: 'icon-speedometer',
+      badge: {
+        variant: 'info',
+        text: '',
+      },
+    },
 
     {
       name: 'New Feeds',
@@ -12,6 +21,16 @@ export default {
       },
     },
 
+    {
+      name: 'Forum',
+      url: '/forum',
+      icon: 'icon-speedometer',
+      badge: {
+        variant: 'info',
+        text: '',
+      },
+    },
+ 
     {
       name: 'Messenger',
       url: '/messenger',
