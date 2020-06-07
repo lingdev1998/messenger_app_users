@@ -1,21 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import 'antd/dist/antd.css';
-import { Modal, Button, Form, Input, Upload } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Modal, Button } from 'antd';
+import { Form, Input, Upload } from 'antd';
+import {  UploadOutlined } from '@ant-design/icons';
 import axios from 'axios';
+const { TextArea } = Input;
+// const layout = {
+//     labelCol: {
+//         span: 4,
+//     },
+//     wrapperCol: {
+//         span: 16,
+//     },
+// };
+// const validateMessages = {
+//     required: '${label} is required!',
+//     types: {
+//         email: '${label} is not validate email!',
+//         number: '${label} is not a validate number!',
+//     },
+//     number: {
+//         range: '${label} must be between ${min} and ${max}',
+//     },
+// };
 
 
-export const EditGroup = (props) => {
+
+export const CreateNewPost = (props) => {
     const [form] = Form.useForm();
     const [file, setFile] = useState();
-    const [url, setUrl] = useState(null);
+    const [url, setUrl] = useState("");
     const [progress, setProgress] = useState(0);
-    const [item, setItem] = useState(undefined);
-
     useEffect(() => {
-        setItem(props.item);
         form.resetFields();
-    }, [props.item]);
+    }, []);
 
     const handleOnChange = ({ file, fileList, event }) => {
         console.log(file, fileList, event);
@@ -51,16 +69,18 @@ export const EditGroup = (props) => {
                 onError({ event: error });
             });
     }
+
     return (
         <div className="container">
             <Modal
                 destroyOnClose={true}
                 visible={props.visible}
-                title="Cập Nhật Nhóm"
-                okText="Update"
+                title="Create Post"
+                okText="Create"
                 cancelText="Cancel"
                 onCancel={() => {
-                    props.handleEditModalCancelClick();
+                    form.resetFields();
+                    props.setCreateNewPostIsShow();
                 }
                 }
                 onOk={() => {
@@ -68,11 +88,10 @@ export const EditGroup = (props) => {
                         .validateFields()
                         .then(values => {
                             form.resetFields();
-                            props.onUpdateGroup({
-                                groupId: item !== undefined ? item.id : "",
-                                imgUrl: url === null ? item.group_avatar : url,
-                                groupName: values.groupName,
-                                groupDes: values.description
+                            props.onCreatePost({
+                                imgUrl: url ,
+                                postTitle: values.postTitle,
+                                content: values.content,
                             });
                         })
                         .catch(info => {
@@ -85,26 +104,34 @@ export const EditGroup = (props) => {
                     layout="vertical"
                     name="form_in_modal"
                     initialValues={{
-                        groupName: props.item !== undefined ? props.item.group_name : "",
-                        description: props.item !== undefined ? props.item.group_description : ""
+                        postTitle: "",
+                        content: "",
                     }}
                 >
                     <Form.Item
-                        name="groupName"
-                        label="Tên Nhóm: "
+                        name="postTitle"
+                        label="Title: "
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input the title of collection!',
+                                message: 'Please input the title of post!',
                             },
                         ]}
                     >
                         <Input />
                     </Form.Item>
-                    <Form.Item name="description" label="Mô Tả: ">
-                        <Input type="textarea" />
+                    <Form.Item
+                        name="content"
+                        label="Content: "
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input the content of post!',
+                            },
+                        ]}
+                    >
+                        <TextArea rows={4} />
                     </Form.Item>
-
                 </Form>
                 <Upload
                     multiple={false}
@@ -124,4 +151,4 @@ export const EditGroup = (props) => {
     );
 
 }
-export default EditGroup;
+export default CreateNewPost;

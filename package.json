@@ -82,6 +82,7 @@
     "react-table": "^6.10.3",
     "react-test-renderer": "^16.8.6",
     "react-text-mask-hoc": "^0.11.0",
+    "react-textarea-autosize": "^8.0.1",
     "react-toastify": "^5.4.1",
     "react-trello": "^2.2.3",
     "reactjs-autobahn": "^1.8.19",
