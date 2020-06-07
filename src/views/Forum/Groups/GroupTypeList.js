@@ -1,14 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
-import { Badge, Card, CardBody, CardHeader, Col, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Row, TabContent, TabPane, Input, Label } from 'reactstrap';
 import './GroupList.css'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useParams
-} from "react-router-dom";
+
 export const GroupTypeList = (props) => {
     const [listType,setListType] = useState([]);
     useEffect(()=>{

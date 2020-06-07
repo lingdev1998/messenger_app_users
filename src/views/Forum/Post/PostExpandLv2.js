@@ -1,20 +1,18 @@
 import React, { createElement, useState , useEffect} from 'react';
-import { Comment, Tooltip, Avatar } from 'antd';
+import { Comment, Tooltip, Avatar ,Tag} from 'antd';
 import moment from 'moment';
 import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
 import 'antd/dist/antd.css';
 import axios from 'axios';
-import PostExpandLv2 from './PostExpandLv2';
-
 import {useSelector} from 'react-redux';
 
-const PostItemExpand = (props) => {
+const PostItemExpandLv2 = (props) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
   const [children , setChildren] = useState([]);
-  const state = useSelector(state=>state.user.userInfo)
 
+  const state = useSelector(state=>state.user.userInfo);
   useEffect(() => {
     var formData = new FormData();
     formData.append("commentId", props.item.id)
@@ -48,9 +46,10 @@ const PostItemExpand = (props) => {
         })}
       </Tooltip>
       <span className="comment-action">{dislikes}</span>
-    </span>,
-    <span key="comment-basic-reply-to" style={{display:(props.item.userComment === state.id ? "none" : "block")}} onClick={()=>props.sfocus(props.item)}>Reply to</span>,
-  ];
+    </span>, 
+    <span key="comment-basic-reply-to" style={{display:(props.item.userComment === state.id ? "none" : "block")}} onClick={()=>props.sfocus(props.item,props.parrentItem)}>Reply to</span>
+
+   ];
 
   return (
     <Comment
@@ -64,7 +63,7 @@ const PostItemExpand = (props) => {
       }
       content={
         <p>
-          {props.item.comment_content}
+          {props.item.parrentTag !== null ? <Tag>{props.item.parrentTag}</Tag> : ""}{props.item.comment_content}
         </p>
       }
       datetime={
@@ -74,11 +73,11 @@ const PostItemExpand = (props) => {
       }
       >
            {children.map(item => 
-              item !== undefined ? <PostExpandLv2 _count={props._count} parrentItem= {props.item} sfocus={props.sfocusLv2} item={item}/> :""
+              item !== undefined ? <PostItemExpandLv2 sfocus={props.sfocus} item={item}/> :""
             )}
  
  
     </Comment>
   );
 };
-export default PostItemExpand;
+export default PostItemExpandLv2;

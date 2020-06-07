@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import 'antd/dist/antd.css';
-import { Modal, Button, Form, Input, Upload } from 'antd';
+import { Modal, Button, Form, Input, Upload, } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
+
 import axios from 'axios';
 
 
@@ -56,11 +57,11 @@ export const EditGroup = (props) => {
             <Modal
                 destroyOnClose={true}
                 visible={props.visible}
-                title="Cập Nhật Nhóm"
+                title="Edit Post"
                 okText="Update"
                 cancelText="Cancel"
                 onCancel={() => {
-                    props.handleEditModalCancelClick();
+                    props.setUpdatePostIsShow(false);
                 }
                 }
                 onOk={() => {
@@ -68,11 +69,11 @@ export const EditGroup = (props) => {
                         .validateFields()
                         .then(values => {
                             form.resetFields();
-                            props.onUpdateGroup({
-                                groupId: item !== undefined ? item.id : "",
-                                imgUrl: url === null ? item.group_avatar : url,
-                                groupName: values.groupName,
-                                groupDes: values.description
+                            props.onUpdatePost({
+                                postId: props.item !== undefined ? props.item.id : "",
+                                imgUrl: url === "" ? item.postImgUrl : url,
+                                postTitle: values.postTitle,
+                                postContent: values.postContent
                             });
                         })
                         .catch(info => {
@@ -85,13 +86,13 @@ export const EditGroup = (props) => {
                     layout="vertical"
                     name="form_in_modal"
                     initialValues={{
-                        groupName: props.item !== undefined ? props.item.group_name : "",
-                        description: props.item !== undefined ? props.item.group_description : ""
+                        postTitle: props.item !== undefined ? props.item.post_title : "",
+                        postContent: props.item !== undefined ? props.item.post_content : ""
                     }}
                 >
                     <Form.Item
-                        name="groupName"
-                        label="Tên Nhóm: "
+                        name="postTitle"
+                        label="Post Title: "
                         rules={[
                             {
                                 required: true,
@@ -101,7 +102,15 @@ export const EditGroup = (props) => {
                     >
                         <Input />
                     </Form.Item>
-                    <Form.Item name="description" label="Mô Tả: ">
+                    <Form.Item name="postContent"
+                        label="Post Content: "
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input the title of collection!',
+                            },
+                        ]}
+                    >
                         <Input type="textarea" />
                     </Form.Item>
 

@@ -1,6 +1,4 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { Badge, Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
-import classnames from 'classnames';
 import GroupList from './Groups/GroupsList';
 import GroupTypeList from './Groups/GroupTypeList';
 import axios from 'axios';
@@ -190,11 +188,11 @@ export const Forum = () => {
             <div className="row no-gutters" style={{ padding: "30px", paddingTop: "0px" }}>
                 {/* <p>Rendered {_count} times</p> */}
             </div>
-            <div className="row no-gutters" >
-                <div className="col-2">
+            <div className="row no-gutters" style={{background:"white"}} >
+                <div className="col-2" style={{borderRight:"1px solid", borderColor:"#E3E4E6"}}>
                     <GroupTypeList setCreateGroupIsShow={setCreateGroupIsShow} listType={listTypeOfGroup} checkAllStatus={checkAllStatus} handleAllChecked={handleAllChecked} handleCheckBoxChangeStatus={handleCheckBoxChangeStatus} handleChangeRangeRadio={handleChangeRangeRadio} currentRangeRadio={currentRangeRadio} />
                 </div>
-                <div className="col-8 forum ">
+                <div className="col-8 forum " >
                     <div className="row no-gutters">
                         <div className="col-12">
                             <div className="input-group">
@@ -218,7 +216,9 @@ export const Forum = () => {
                       />
 
                 </div>
-                <div className="col-2"></div>
+                <div className="col-2"  style={{borderLeft:"1px solid", borderColor:"#E3E4E6"}}>
+                    
+                </div>
             </div>
             <CreateNewGroup 
             listTypeOfGroup={listTypeOfGroup} 

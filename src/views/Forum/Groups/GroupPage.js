@@ -1,5 +1,4 @@
-import React, { Component, useParams, useEffect, useState } from 'react';
-import { Row, Col } from 'reactstrap';
+import React, {  useEffect, useState } from 'react';
 import axios from 'axios';
 import Posts from '../Post/Posts'
 export const GroupPage = (props) => {
@@ -8,17 +7,9 @@ export const GroupPage = (props) => {
 
     }, [props.match.params.id]);
     return (
-        <div className="col-12 group-page">
- 
-            <div className="row no-gutters">
- 
-                <div className="col-12">
-                    <Posts id={props.match.params.id} />
-                </div>
-             </div>
-        </div>
-
-
+        <>
+            <Posts id={props.match.params.id} />
+        </>
     );
 }
 

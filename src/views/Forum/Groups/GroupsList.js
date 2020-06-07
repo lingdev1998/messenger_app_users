@@ -1,14 +1,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Badge, Card, CardBody, CardHeader, Col, ListGroup, ListGroupItem, ListGroupItemHeading, ListGroupItemText, Row, TabContent, TabPane, Input, Label } from 'reactstrap';
+import { Card, ListGroup, ListGroupItem } from 'reactstrap';
 import './GroupList.css'
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useParams
+    Link
 } from "react-router-dom";
 import { Tag } from 'antd';
 import {
@@ -51,11 +48,11 @@ export const GroupList = (props) => {
     }, [props.listGroup]);
     return (
         <>
-            <div className="row no-gutters"  >
-                <div className="col-12" style={{ padding: "10px 50px" }}>
-                    <Card className="text-center">
+            <div className="row no-gutters"   >
+                <div className="col-12" style={{ padding: "0" }}>
+                    <Card className="text-center" style={{border:"none"}}>
 
-                        <ListGroup>
+                        <ListGroup style={{overflowY:"scroll",overflowX:"hidden", maxHeight:"650px",minHeight:"650px"}}>
                             {listGroup.map(item =>
                                 item !== undefined ? <ListGroupItem className="justify-content-between">
 
